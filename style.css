@@ -1,0 +1,50 @@
+
+.container #modal{
+    padding: 12px;
+}
+.container #modal #main .product .product-inside{
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.container #modal #main .product .product-inside .product-description{
+    padding: 5px;
+    border-radius: 5px;
+    color: #055ebd;
+}
+.container #modal #main .product .product-inside .product-description img{
+    width: 100%;
+    border: 5px solid #ccc;
+    border-radius: 4px;
+}
+.container #modal #main .product .product-inside .product-description h5{
+   padding:0 14%;
+}
+.container #modal .container-inner{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 500px;
+    width: 100%;
+}
+.container #modal .backdrop{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.75);
+    display: none;
+}
+
+.container #modal .container-inner .close-btn{
+    position: absolute;
+    right: 25px;
+    top: 12px;
+    font-size: 21px;
+    z-index: 9999;
+    color: #000;
+    opacity: 1;
+    outline:none;
+}
