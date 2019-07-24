@@ -1,7 +1,7 @@
-function onLoad (done) {
+onLoad = (done) => {
     getCategoriesData('data.json', function(response) {
-        var data = response;
-        var productDiv = "<div class='product'>";
+        let data = response;
+        let productDiv = "<div class='product'>";
         data.groups.forEach((val, key) => {
             productDiv += "<div class='product-inside col-md-4 col-sm-12 col-xs-12'>" +
                 "<div class='product-description'>" +
@@ -17,14 +17,15 @@ function onLoad (done) {
         });
         if (done) done();
     });
-}
+};
 
-function getCategoriesData(url, callback) {
-    var xmlhttp = new XMLHttpRequest();
+getCategoriesData = (url, callback) => {
+    let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            let data;
             try {
-                var data = JSON.parse(xmlhttp.responseText);
+                data = JSON.parse(xmlhttp.responseText);
             } catch(err) {
                 console.log(err.message + " in " + xmlhttp.responseText);
                 return;
@@ -34,39 +35,36 @@ function getCategoriesData(url, callback) {
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
-}
-function setAttributes (el, attrs){
-    for(var key in attrs) {
+};
+setAttributes = (el, attrs) =>{
+    for(let key in attrs) {
         el.setAttribute(key, attrs[key]);
     }
 };
-function closeModal() {
+closeModal = () => {
     document.getElementsByClassName("container-inner")[0].style.display = 'none';
     document.getElementsByClassName("backdrop")[0].style.display = 'none';
 };
-function setIcons(cls, navigation, navigator) {
-    if(cls === 'left') {
-        return "<a class= 'left carousel-control' href='#myCarousel' data-slide="+navigator+">" +
+setIcons = (cls, navigation, navigator) => {
+    return (cls === 'left') ?
+        ("<a class= 'left carousel-control' href='#myCarousel' data-slide="+navigator+">" +
             "<span class='glyphicon glyphicon-chevron-left'></span>" +
             "<span class='sr-only'>"+navigation+"</span>"+
-            "</a>";
-    } else {
-        return "<a class= 'right carousel-control' href='#myCarousel' data-slide="+navigator+">" +
+            "</a>")  : ("<a class= 'right carousel-control' href='#myCarousel' data-slide="+navigator+">" +
         "<span class='glyphicon glyphicon-chevron-right'></span>" +
         "<span class='sr-only'>"+navigation+"</span>"+
-        "</a>";
-    }
-}
+        "</a>")
+};
 
-function callBack(data){
+callBack = (data) => {
     return function(){
         document.getElementsByClassName("container-inner")[0].style.display = 'block';
         document.getElementsByClassName("backdrop")[0].style.display = 'block';
          document.getElementsByClassName("container-inner")[0].innerHTML = '';
-         var carouselElement = document.createElement('div');
+         let carouselElement = document.createElement('div');
          setAttributes(carouselElement, {'id': 'myCarousel', 'class': 'carousel slide', 'data-ride': "carousel"});
-        var imagesList = "<div class='carousel-inner'>";
-        var slideIndicators = "<ol class='carousel-indicators'>";
+        let imagesList = "<div class='carousel-inner'>";
+        let slideIndicators = "<ol class='carousel-indicators'>";
         data.images.forEach((val, key) => {
             imagesList += "<div class='item'><img src="+val.href+" style='width:100%';/></div>";
             slideIndicators += "<li class='indicator' data-target='#myCarousel' data-slide-to="+key+"></li>";
@@ -77,12 +75,12 @@ function callBack(data){
             "onclick='closeModal()'>x</button>";
             carouselElement.innerHTML += imagesList;
         carouselElement.innerHTML += slideIndicators;
-        var leftIcon = setIcons('left', 'Previous', 'prev');
-        var rightIcon = setIcons('right', 'Next', 'next');
+        let leftIcon = setIcons('left', 'Previous', 'prev');
+        let rightIcon = setIcons('right', 'Next', 'next');
         carouselElement.innerHTML += leftIcon;
         carouselElement.innerHTML += rightIcon;
         document.getElementsByClassName("container-inner")[0].appendChild(carouselElement);
         document.getElementsByClassName("item")[0].classList = 'item active';
         document.getElementsByClassName("indicator")[0].classList = 'indicator active';
     }
-}
+};
